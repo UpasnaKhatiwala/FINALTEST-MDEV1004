@@ -6,34 +6,28 @@ date - June 23rd 2023
 
 
 import express from 'express';
-const router = express.Router();
+let router = express.Router();
+import passport from 'passport';
 
-/* Get the game Controller */
-import { DisplayGamesList, DisplayGamesByID, AddGames, UpdateGames, DeleteGames } from '../Controllers/games';
+/* GET the movie controller */
+import {DisplayGamesList, DisplayGamesByID, AddGames, UpdateGames, DeleteGames, ProcessRegistration, ProcessLogin, ProcessLogout} from '../Controllers/games';
 
-/* GET /api/games - display the person list */
-router.get('/', (req, res, next) => {
-  DisplayGamesList(req, res, next);
-});
+router.get('/list', passport.authenticate('jwt', {session: false}), (req, res, next) =>   DisplayGamesList(req, res, next) );
 
-/* GET /api/games/:id - display a person by id */
-router.get('/:id', (req, res, next) => {
-  DisplayGamesByID(req, res, next);
-});
+router.get('/find/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => DisplayGamesByID(req, res, next));
 
-/* POST /api/people - add a new person */
-router.post('/', (req, res, next) => {
-  AddGames(req, res, next);
-});
+router.post('/add', passport.authenticate('jwt', {session: false}), (req, res, next) => AddGames(req, res, next));
 
-/* PUT /api/games/:id - update a person by id */
-router.put('/:id', (req, res, next) => {
-  UpdateGames(req, res, next);
-});
+router.put('/update/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => UpdateGames(req, res, next));
 
-/* DELETE /api/games/:id - delete a person by id */
-router.delete('/:id', (req, res, next) => {
-  DeleteGames(req, res, next);
-});
+router.delete('/delete/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => DeleteGames(req, res, next));
+
+
+//Authentication routes
+router.post('/register', (req, res, next) => ProcessRegistration(req, res, next));
+
+router.post('/login', (req, res, next) => ProcessLogin(req, res, next));
+
+router.get('/logout', (req, res, next) => ProcessLogout(req, res, next));
 
 export default router;

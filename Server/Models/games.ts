@@ -1,7 +1,7 @@
 /*file name - games.ts (Models)
 Student Name - Upasna Khatiwala
 Student id - 200543736
-date - June 23rd 2023
+date - August 17th 2023
 */
 
 import { Schema, model } from 'mongoose';
@@ -10,8 +10,8 @@ import { Schema, model } from 'mongoose';
 interface IGames {
   Id: number;
   title: string;
-  genres: string | string[];
-  platforms: string | string[];
+  genres: string[];
+  platforms: string[];
   releaseDate: string;
   developers: string;
   designers: string;
@@ -20,7 +20,7 @@ interface IGames {
   description: string;
   ImageURL: string;
   artists: string;
-  modes: string | [string];
+  modes: [string];
 }
 
 // Person Schema - defines the structure of a person using the Person Interface

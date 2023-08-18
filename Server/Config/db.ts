@@ -5,10 +5,12 @@ date - August 17th 2023
 */
 
 
-let localURI = '';
+let localURI = ' ';
 let remoteURI = 'mongodb+srv://upasnakhatiwala3:qTD6QRtmWpcWOJOJ@favouritegames.de1ulry.mongodb.net/favouritegames';
+let secret = 'SomeSecret';
 
 export default {
     localURI: localURI,
-    remoteURI: remoteURI
+    remoteURI: remoteURI,
+    secret: secret
 }
